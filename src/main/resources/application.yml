@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: springauth
+  
+  config:
+    import: optional:file:.env[.properties]
+  
+  # Database credentials
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-token-expiration-ms: 900000
+    refresh-token-expiration-days: 7
+  cookie:
+    # If false cookie can be sent over HTTP (not only HTTPS)
+    secure: ${COOKIE_SECURE:false}
